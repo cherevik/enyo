@@ -1156,10 +1156,11 @@
 				if (!enyo.exists(e.type)) {
 					e.type = nom;
 				}
-				this.bubble(nom, e);
+				var rv = this.bubble(nom, e);
 				if (d) {
 					e.delegate = d;
 				}
+				return rv;
 			};
 		}
 	};
