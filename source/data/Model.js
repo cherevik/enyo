@@ -709,7 +709,7 @@
 				, defaults;
 
 			// defaults = this.defaults && (typeof this.defaults == 'function'? this.defaults(attrs, opts): this.defaults);
-			defaults = this.defaults && typeof this.defaults == 'function'? this.defaults(attrs, opts): null;
+			defaults = this.defaults && typeof this.defaults == 'function'? this.defaults(attrs, opts): this.defaults;
 
 			// ensure we have a unique identifier that could potentially
 			// be used in remote systems
