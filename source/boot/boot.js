@@ -33,6 +33,9 @@
 				/* jshint evil: false */
 			}
 			if (window.less && (isLess || isCss)) {
+				if (!window.less.sheets) {
+					window.less.sheets = [];
+				}
 				window.less.sheets.push(link);
 				if (!enyo.loader.finishCallbacks.lessRefresh) {
 					enyo.loader.finishCallbacks.lessRefresh = function () {
