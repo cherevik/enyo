@@ -4,7 +4,7 @@
 		fs = require("fs"),
 		path = require("path"),
 		walker = require("walker"),
-		uglify = require("uglify-js"),
+		uglify = require("uglify-es"),
 		nopt = require("nopt"),
 		less = require("less");
 		RezInd = require('less-plugin-resolution-independence');
@@ -139,17 +139,24 @@
 		return blob;
 	};
 
+	function read_file(path, default_value) {
+		try {
+			return fs.readFileSync(path, "utf8");
+		} catch (ex) {
+			if (ex.code == "ENOENT" && default_value != null) return default_value;
+			fatal(ex);
+		}
+	}
+
 	var compressJsFile = function(inPath) {
 		var outputOpts = {
-//			beautify: false,
-//			indent_level: 4,
 			ascii_only: true
 		};
 		if (opt.beautify) {
 			outputOpts.beautify = true;
 			outputOpts.indent_level = 4;
 		}
-		var result = uglify.minify(inPath, {output: outputOpts});
+		var result = uglify.minify(read_file(inPath), {output: outputOpts});
 		return result.code;
 	};
 
