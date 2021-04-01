@@ -5,10 +5,10 @@
 	*/
 	enyo.machine = {
 		sheet: function (inPath) {
-			var type = 'text/css';
-			var rel = 'stylesheet';
-			var isCss = (inPath.slice(-4) == '.css');
-			var isLess = !isCss || (inPath.slice(-5) == '.less');
+			let type = 'text/css';
+			let rel = 'stylesheet';
+			let isCss = (inPath.slice(-4) === '.css');
+			let isLess = !isCss || (inPath.slice(-5) === '.less');
 			if (window.less && (isLess || isCss)) {
 				// If client-side less is loaded, insert the less stylesheet
 				type = 'text/less';
@@ -17,7 +17,7 @@
 				// Otherwise, we expect a css file of the same name to exist
 				inPath = inPath.slice(0, inPath.length-4) + 'css';
 			}
-			var link;
+			let link;
 			if (enyo.runtimeLoading || isLess || (window.less && isCss)) {
 				link = document.createElement('link');
 				link.href = inPath;
@@ -46,7 +46,7 @@
 		},
 		script: function (inSrc, onLoad, onError) {
 			if (enyo.runtimeLoading) {
-				var script = document.createElement('script');
+				let script = document.createElement('script');
 				script.src = inSrc;
 				script.onload = onLoad;
 				script.onerror = onError;
@@ -83,9 +83,9 @@
 	* @private
 	*/
 	enyo.depends = function () {
-		var ldr = enyo.loader;
+		let ldr = enyo.loader;
 		if (!ldr.packageFolder) {
-			var tag = enyo.locateScript('package.js');
+			let tag = enyo.locateScript('package.js');
 			if (tag && tag.path) {
 				ldr.aliasPackage(tag.path);
 				ldr.packageFolder = tag.path + '/';
@@ -97,10 +97,10 @@
 
 	// Runtime loader
 	(function () {
-		var enyo = window.enyo;
-		var runtimeLoadQueue = [];
+		let enyo = window.enyo;
+		let runtimeLoadQueue = [];
 
-		var domLoaded = false;
+		let domLoaded = false;
 		enyo.ready(function () {
 			domLoaded = true;
 		});
@@ -127,7 +127,7 @@
 				}
 			} else {
 				if (enyo.isArray(depends)) {
-					for (var i = 0; i < depends.length; ++i) {
+					for (let i = 0; i < depends.length; ++i) {
 						enyo.loader.require(depends[i]);
 					}
 				} else {
@@ -144,10 +144,10 @@
 				onLoad(); // Run user callback function
 			}
 			if (runtimeLoadQueue.length) {
-				var args = runtimeLoadQueue.shift();
-				var depends = args[0];
-				var dependsArg = enyo.isArray(depends) ? depends : [depends];
-				var onLoadCallback = args[1];
+				let args = runtimeLoadQueue.shift();
+				let depends = args[0];
+				let dependsArg = enyo.isArray(depends) ? depends : [depends];
+				let onLoadCallback = args[1];
 				enyo.loader.finishCallbacks.runtimeLoader = function (inBlock) {
 					// Once loader is done loading a package, we chain a call to runtimeLoad(),
 					// which will call the onLoadCallback from the original load call, passing
