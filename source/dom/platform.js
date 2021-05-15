@@ -32,7 +32,7 @@
 	*
 	* @name enyo.platform
 	*/
-	enyo.platform = 
+	enyo.platform =
 		/** @lends enyo.platform */ {
 		//* `true` if the platform has native single-finger [events]{@glossary event}.
         touch: Boolean(('ontouchstart' in window) || window.navigator.msMaxTouchPoints || (window.navigator.msManipulationViewsEnabled && window.navigator.maxTouchPoints)),
@@ -107,7 +107,7 @@
 			break;
 		}
 	}
-	
+
 	/**
 	* These platforms only allow one argument for [console.log()]{@glossary console.log}:
 	*
